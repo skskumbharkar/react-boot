@@ -36,7 +36,7 @@
         "analyze": "source-map-explorer 'build/static/js/*.js'",
         "analyze-json": "source-map-explorer 'build/static/js/*.js' --json",
         "predeploy": "yarn build",
-        "deploy": "gh-pages -b main -d build"
+        "deploy": "gh-pages -d build"
     },
     "browserslist": {
         "production": [

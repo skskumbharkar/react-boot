@@ -25,7 +25,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
+    // support importing modules using absolute paths
+    "baseUrl": "src"
   },
   "include": [
     "src"

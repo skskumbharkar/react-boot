@@ -1,22 +1,23 @@
 import React from 'react';
 import { hydrate, render } from 'react-dom';
 import './index.scss';
-import { App } from './App';
+import { AppComponent } from './components/app';
 import reportWebVitals from './reportWebVitals';
+import 'fontsource-roboto';
 
 const onLoad = () => {
     const rootElement = document.getElementById('root');
     if (rootElement && rootElement.hasChildNodes()) {
         hydrate(
             <React.StrictMode>
-                <App />
+                <AppComponent />
             </React.StrictMode>,
             rootElement,
         );
     } else {
         render(
             <React.StrictMode>
-                <App />
+                <AppComponent />
             </React.StrictMode>,
             rootElement,
         );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -15,7 +15,11 @@ export const AlertDialogComponent: React.FC<AlertDialogComponentProps> = ({
     openDialog,
     message,
 }: AlertDialogComponentProps) => {
-    const [open, setOpen] = React.useState(openDialog);
+    const [open, setOpen] = React.useState<boolean>(openDialog);
+
+    useEffect(() => {
+        setOpen(openDialog);
+    }, [openDialog]);
 
     const handleClose = () => {
         setOpen(false);

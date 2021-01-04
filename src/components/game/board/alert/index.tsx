@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -8,37 +8,31 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 export type AlertDialogComponentProps = {
     openDialog: boolean;
+    title: string;
     message: string;
+    closeAlert: (open: boolean) => void;
 };
 
 export const AlertDialogComponent: React.FC<AlertDialogComponentProps> = ({
     openDialog,
+    title,
     message,
+    closeAlert,
 }: AlertDialogComponentProps) => {
-    const [open, setOpen] = React.useState<boolean>(openDialog);
-
-    useEffect(() => {
-        setOpen(openDialog);
-    }, [openDialog]);
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
     return (
         <div>
             <Dialog
-                open={open}
-                onClose={handleClose}
+                open={openDialog}
+                onClose={closeAlert}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">Game Over</DialogTitle>
+                <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">{message}</DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} color="primary" autoFocus>
+                    <Button onClick={() => closeAlert(false)} color="primary" autoFocus>
                         OK
                     </Button>
                 </DialogActions>

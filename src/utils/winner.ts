@@ -1,6 +1,5 @@
 import { Cell } from 'components/game';
 
-// eslint-disable-next-line import/prefer-default-export
 export const identifyWinner = (cells: Cell[]): boolean => {
     const possibleMatchWinner = [
         [0, 1, 2],
@@ -25,4 +24,14 @@ export const identifyWinner = (cells: Cell[]): boolean => {
             cells[row[0]].value === cells[row[2]].value;
     });
     return isMatchFound;
+};
+
+export const isMatchDraw = (cells: Cell[]): boolean => {
+    let drawMatch = true;
+    cells.forEach((item: Cell) => {
+        if (item.value === '') {
+            drawMatch = false;
+        }
+    });
+    return drawMatch;
 };

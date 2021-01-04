@@ -59,7 +59,7 @@ export const TimeTravelComponent: React.FC<TimeTravelComponentProps> = ({
                                             <ListItemIcon>
                                                 <InboxIcon />
                                             </ListItemIcon>
-                                            <ListItemText primary={`Move : ${index + 1}`} />
+                                            <ListItemText primary={`Move : ${index + 1} ${item.currentMove}`} />
                                         </ListItem>
                                     );
                                 })}

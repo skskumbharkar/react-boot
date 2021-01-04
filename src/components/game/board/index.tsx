@@ -3,19 +3,32 @@ import Grid from '@material-ui/core/Grid';
 import cloneDeep from 'lodash.clonedeep';
 import { CellComponent } from 'components/game/cell';
 import FormLabel from '@material-ui/core/FormLabel';
-import { BoardState, Cell, defaultCells } from '../index';
+import { BoardState, Cell, defaultCells, GameStatus } from '../index';
 
 export type BoardComponentProps = {
     currentBoard: BoardState;
-    updateHistory: (cells: Cell[]) => void;
+    updateHistory: (cells: Cell[], index: number) => void;
 };
 
 export const BoardComponent: React.FC<BoardComponentProps> = ({ currentBoard, updateHistory }: BoardComponentProps) => {
     const handleCellClick = (value: string, index: number) => {
-        if (value === '' && currentBoard?.closeGame?.gameOver === false) {
+        if (value === '' && currentBoard?.closeGame?.gameStatus === GameStatus.IN_PROGRESS) {
             const cells = cloneDeep(currentBoard.cells) || defaultCells;
             cells[index].value = currentBoard.nextMove as string;
-            updateHistory(cells);
+            updateHistory(cells, index);
+        }
+    };
+
+    const getFormLabel = (): string => {
+        switch (currentBoard?.closeGame?.gameStatus) {
+            case GameStatus.IN_PROGRESS:
+                return `Next move: ${currentBoard?.nextMove}`;
+            case GameStatus.WIN:
+                return `Winner: ${currentBoard?.nextMovePlayer}`;
+            case GameStatus.DRAW:
+                return 'Match Draw';
+            default:
+                return `Next move: ${currentBoard?.nextMove}`;
         }
     };
 
@@ -23,11 +36,7 @@ export const BoardComponent: React.FC<BoardComponentProps> = ({ currentBoard, up
         <Grid item xs={4}>
             <Grid container>
                 <Grid item>
-                    <FormLabel>
-                        {currentBoard?.closeGame?.gameOver
-                            ? `Winner: ${currentBoard?.nextMovePlayer}`
-                            : `Next move: ${currentBoard?.nextMove}`}
-                    </FormLabel>
+                    <FormLabel>{getFormLabel()}</FormLabel>
                 </Grid>
             </Grid>
             <Grid container justify="center" spacing={0}>

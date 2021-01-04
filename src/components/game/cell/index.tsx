@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 export type CellComponentProps = {
     value: string | null;
     handleClick: () => void;
+    winingCell: boolean;
 };
 
 const useStyles = makeStyles({
@@ -26,13 +27,18 @@ const useStyles = makeStyles({
     },
 });
 
-export const CellComponent: React.FC<CellComponentProps> = ({ value, handleClick }: CellComponentProps) => {
+export const CellComponent: React.FC<CellComponentProps> = ({ value, handleClick, winingCell }: CellComponentProps) => {
     const classes = useStyles();
 
     return (
         <Card className={classes.root} variant="outlined">
             <CardContent className={classes.noPadding}>
-                <Button className={classes.buttonArea} onClick={handleClick}>
+                <Button
+                    className={classes.buttonArea}
+                    onClick={handleClick}
+                    variant={winingCell ? 'contained' : undefined}
+                    color={winingCell ? 'primary' : undefined}
+                >
                     {value}
                 </Button>
             </CardContent>

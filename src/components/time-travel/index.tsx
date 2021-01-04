@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import FormLabel from '@material-ui/core/FormLabel';
 import Paper from '@material-ui/core/Paper';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/Inbox';
-import { BoardState } from '../game';
+import HistoryIcon from '@material-ui/icons/History';
+import Timeline from '@material-ui/lab/Timeline';
+import TimelineItem from '@material-ui/lab/TimelineItem';
+import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
+import TimelineConnector from '@material-ui/lab/TimelineConnector';
+import TimelineContent from '@material-ui/lab/TimelineContent';
+import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
+import TimelineDot from '@material-ui/lab/TimelineDot';
+import Typography from '@material-ui/core/Typography';
+import { ButtonBase } from '@material-ui/core';
+import { BoardState } from '../../static/board-state';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -19,6 +24,18 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         control: {
             padding: theme.spacing(2),
+        },
+        timeline: {
+            width: '100%',
+            '& ul': {
+                width: '100%',
+            },
+        },
+        timelineItem: {
+            minWidth: 100,
+        },
+        pointer: {
+            cursor: 'pointer',
         },
     }),
 );
@@ -35,35 +52,47 @@ export const TimeTravelComponent: React.FC<TimeTravelComponentProps> = ({
     const classes = useStyles();
     const [selectedIndex, setSelectedIndex] = React.useState(boards.length > 0 ? boards.length - 1 : 0);
 
-    const selectMove = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => {
+    useEffect(() => {
+        setSelectedIndex(boards.length > 0 ? boards.length - 1 : 0);
+    }, [boards]);
+
+    const selectMove = (index: number) => {
         setSelectedIndex(index);
         updateSelectedMove(boards[index]);
     };
 
     return (
         <Grid item xs={4}>
-            <Paper className={classes.control}>
+            <Paper className={classes.control} elevation={3}>
                 <Grid container>
                     <Grid item>
                         <FormLabel>Time Travel</FormLabel>
                         <div className={classes.root}>
-                            <List component="nav" aria-label="list of moves">
+                            <Timeline align="alternate" className={classes.timeline}>
                                 {boards.map((item: BoardState, index: number) => {
                                     return (
-                                        <ListItem
-                                            key={item.key}
-                                            button
-                                            selected={selectedIndex === index}
-                                            onClick={(event) => selectMove(event, index)}
-                                        >
-                                            <ListItemIcon>
-                                                <InboxIcon />
-                                            </ListItemIcon>
-                                            <ListItemText primary={`Move : ${index + 1} ${item.currentMove}`} />
-                                        </ListItem>
+                                        <TimelineItem key={item.key} className={classes.timelineItem}>
+                                            <TimelineOppositeContent>
+                                                <Typography>{`Move : ${index + 1}`}</Typography>
+                                            </TimelineOppositeContent>
+                                            <TimelineSeparator>
+                                                <TimelineDot color={selectedIndex === index ? 'primary' : undefined}>
+                                                    <ButtonBase>
+                                                        <HistoryIcon onClick={() => selectMove(index)} />
+                                                    </ButtonBase>
+                                                </TimelineDot>
+                                                <TimelineConnector />
+                                            </TimelineSeparator>
+                                            <TimelineContent>
+                                                <Typography
+                                                    variant="body2"
+                                                    color="textSecondary"
+                                                >{`${item.currentMove}`}</Typography>
+                                            </TimelineContent>
+                                        </TimelineItem>
                                     );
                                 })}
-                            </List>
+                            </Timeline>
                         </div>
                     </Grid>
                 </Grid>

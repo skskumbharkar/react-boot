@@ -1,6 +1,6 @@
-import { Cell } from 'components/game';
+import { Cell } from '../static/board-state';
 
-export const identifyWinner = (cells: Cell[]): boolean => {
+export const identifyWinner = (cells: Cell[]): number[] | undefined => {
     const possibleMatchWinner = [
         [0, 1, 2],
         [3, 4, 5],
@@ -12,18 +12,19 @@ export const identifyWinner = (cells: Cell[]): boolean => {
         [2, 5, 8],
     ];
     let isMatchFound = false;
+    let winingRow: number[] | undefined;
     // eslint-disable-next-line consistent-return
     possibleMatchWinner.forEach((row: number[]) => {
-        if (isMatchFound) {
-            return true;
-        }
         isMatchFound =
             cells[row[0]].value !== '' &&
             cells[row[0]].value === cells[row[1]].value &&
             cells[row[1]].value === cells[row[2]].value &&
             cells[row[0]].value === cells[row[2]].value;
+        if (isMatchFound) {
+            winingRow = row;
+        }
     });
-    return isMatchFound;
+    return winingRow;
 };
 
 export const isMatchDraw = (cells: Cell[]): boolean => {

@@ -1,13 +1,21 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { BoardComponent } from 'components/game/board';
 import Grid from '@material-ui/core/Grid';
 import { TimeTravelComponent } from 'components/time-travel';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { identifyWinner, isMatchDraw } from 'utils/winner';
-import { GameStatus } from 'static/game-status';
-import { GameState } from 'static/game-state';
-import { BoardState, Cell, InitialBoardState } from 'static/board-state';
+import { BoardState, Cell } from 'static/board-state';
 import { AlertDialogComponent } from './board/alert';
+import {
+    closeAlert,
+    selectCurrentBoard,
+    selectHistoryBoards,
+    setupGameStatusDraw,
+    setupGameStatusInProgress,
+    setupGameStatusWin,
+    updateSelectedMove,
+} from './game-slice';
 
 export type GameComponentProps = unknown;
 
@@ -22,99 +30,39 @@ const useStyles = makeStyles(() =>
 
 export const GameComponent: React.FC<GameComponentProps> = () => {
     const classes = useStyles();
-    const [gameState, setGameState] = React.useState<Partial<GameState>>({
-        historyBoards: [],
-        currentBoard: InitialBoardState,
-    });
+    const dispatch = useDispatch();
+    const currentBoard = useSelector(selectCurrentBoard);
+    const historyBoards = useSelector(selectHistoryBoards);
 
     const updateGameHistory = (cells: Cell[], cellIndex: number, board: BoardState) => {
-        let currentBoard;
         const winnerCellLocation = identifyWinner(cells);
         if (winnerCellLocation) {
-            currentBoard = {
-                closeGame: {
-                    gameStatus: GameStatus.WIN,
-                    alertState: {
-                        open: true,
-                        title: 'Game Over',
-                        message: `Winner Player: ${board?.nextMovePlayer as string}`,
-                    },
-                    winnerCellLocation,
-                },
-            };
+            dispatch(setupGameStatusWin({ winnerCellLocation, cells, cellIndex }));
         } else if (isMatchDraw(cells)) {
-            currentBoard = {
-                closeGame: {
-                    gameStatus: GameStatus.DRAW,
-                    alertState: {
-                        open: true,
-                        title: 'Match Draw',
-                        message: 'Try again',
-                    },
-                },
-            };
+            dispatch(setupGameStatusDraw({ cells, cellIndex }));
         } else {
-            currentBoard = {
-                nextMove: (board?.nextMove as string) === 'X' ? 'O' : 'X',
-                nextMovePlayer: (board?.nextMovePlayer as string) === 'A' ? 'B' : 'A',
-            };
+            dispatch(setupGameStatusInProgress({ cells, cellIndex }));
         }
-        currentBoard = {
-            ...board,
-            key: (gameState.historyBoards?.length as number) + 1,
-            cells,
-            currentMove: cells[cellIndex].location,
-            ...currentBoard,
-        };
-        setGameState({
-            currentBoard: currentBoard as BoardState,
-            historyBoards: [...(gameState.historyBoards as BoardState[]), currentBoard as BoardState],
-        });
-    };
-
-    const updateSelectedMove = (currentBoard: BoardState) => {
-        setGameState({
-            currentBoard,
-            historyBoards: gameState.historyBoards,
-        });
-    };
-
-    const closeAlert = (open: boolean) => {
-        setGameState({
-            currentBoard: {
-                ...(gameState.currentBoard as BoardState),
-                closeGame: {
-                    gameStatus: gameState.currentBoard?.closeGame?.gameStatus as GameStatus,
-                    alertState: {
-                        open,
-                        title: 'Game Over',
-                        message: `Winner Player: ${gameState.currentBoard?.nextMovePlayer as string}`,
-                    },
-                    winnerCellLocation: gameState.currentBoard?.closeGame?.winnerCellLocation,
-                },
-            },
-            historyBoards: gameState.historyBoards,
-        });
     };
 
     return (
         <Grid container justify="center" className={classes.container} spacing={2}>
             <BoardComponent
                 updateHistory={(cells: Cell[], cellIndex: number) =>
-                    updateGameHistory(cells, cellIndex, gameState.currentBoard as BoardState)
+                    updateGameHistory(cells, cellIndex, currentBoard as BoardState)
                 }
-                currentBoard={gameState.currentBoard as BoardState}
+                currentBoard={currentBoard as BoardState}
             />
             <TimeTravelComponent
-                boards={gameState.historyBoards as BoardState[]}
-                updateSelectedMove={(board: BoardState) => updateSelectedMove(board)}
+                boards={historyBoards as BoardState[]}
+                updateSelectedMove={(board: BoardState) => dispatch(updateSelectedMove({ currentBoard: board }))}
             />
-            {gameState.currentBoard?.closeGame?.alertState?.open && (
+            {currentBoard?.closeGame?.alertState?.open && (
                 <AlertDialogComponent
-                    openDialog={gameState.currentBoard?.closeGame?.alertState?.open as boolean}
-                    title={gameState.currentBoard?.closeGame?.alertState?.title as string}
-                    message={gameState.currentBoard?.closeGame?.alertState?.message as string}
-                    closeAlert={(open: boolean) => closeAlert(open)}
+                    openDialog={currentBoard?.closeGame?.alertState?.open as boolean}
+                    title={currentBoard?.closeGame?.alertState?.title as string}
+                    message={currentBoard?.closeGame?.alertState?.message as string}
+                    closeAlert={(open: boolean) => dispatch(closeAlert({ open }))}
                 />
             )}
         </Grid>

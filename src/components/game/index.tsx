@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { BoardComponent } from 'components/game/board';
+import { BoardComponent } from 'components/board';
 import Grid from '@material-ui/core/Grid';
 import { TimeTravelComponent } from 'components/time-travel';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { identifyWinner, isMatchDraw } from 'utils/winner';
-import { BoardState, Cell } from 'static/board-state';
-import { AlertDialogComponent } from './board/alert';
+import { BoardState, Cell } from 'models/board-state';
+import { AlertDialogComponent } from '../board/alert';
 import {
     closeAlert,
     selectCurrentBoard,

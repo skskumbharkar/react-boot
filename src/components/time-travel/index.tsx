@@ -13,7 +13,7 @@ import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
 import Typography from '@material-ui/core/Typography';
 import { ButtonBase } from '@material-ui/core';
-import { BoardState } from '../../static/board-state';
+import { BoardState } from '../../models/board-state';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

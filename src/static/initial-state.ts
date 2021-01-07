@@ -1,26 +1,7 @@
+import { GameState } from '../models/game-state';
 import { GameStatus } from './game-status';
+import { BoardState, Cell } from '../models/board-state';
 
-export type Cell = {
-    key: number;
-    value: string;
-    location: string;
-};
-export type BoardState = {
-    key: number;
-    cells: Cell[];
-    currentMove: string;
-    nextMove: string;
-    nextMovePlayer: string;
-    closeGame: {
-        gameStatus: GameStatus;
-        alertState: {
-            open: boolean;
-            title: string;
-            message: string;
-        };
-        winnerCellLocation: number[] | undefined;
-    };
-};
 export const defaultCells: Cell[] = [
     {
         key: 1,
@@ -83,4 +64,8 @@ export const InitialBoardState: BoardState = {
         },
         winnerCellLocation: [-1, -1, -1],
     },
+};
+export const InitialGameState: GameState = {
+    historyBoards: [],
+    currentBoard: InitialBoardState,
 };

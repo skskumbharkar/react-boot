@@ -1,7 +1,8 @@
 import React from 'react';
 import { hydrate, render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { store, AppComponent } from './components/app';
+import { AppComponent } from './containers/app';
+import { store } from './stores';
 import './index.scss';
 
 import reportWebVitals from './reportWebVitals';

@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { GameState, InitialGameState } from 'static/game-state';
+import { GameState } from 'models/game-state';
 import {
     setupGameStatusWinReducer,
     setupGameStatusDrawReducer,
     setupGameStatusInProgressReducer,
     updateSelectedMoveReducer,
     closeAlertReducer,
-} from './game-reducers';
+} from '../../stores/reducers/game';
+import { RootState } from '../../stores';
+import { InitialGameState } from '../../static/initial-state';
 
 export const gameSlice = createSlice({
     name: 'game',
@@ -28,8 +30,8 @@ export const {
     closeAlert,
 } = gameSlice.actions;
 
-export const selectCurrentBoard = (state: GameState) => state.currentBoard;
+export const selectCurrentBoard = (state: RootState) => state.game.currentBoard;
 
-export const selectHistoryBoards = (state: GameState) => state.historyBoards;
+export const selectHistoryBoards = (state: RootState) => state.game.historyBoards;
 
 export default gameSlice.reducer;

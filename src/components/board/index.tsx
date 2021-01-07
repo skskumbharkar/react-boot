@@ -1,12 +1,13 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import cloneDeep from 'lodash.clonedeep';
-import { CellComponent } from 'components/game/cell';
+import { CellComponent } from 'components/cell';
 import FormLabel from '@material-ui/core/FormLabel';
 import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { GameStatus } from '../../../static/game-status';
-import { BoardState, Cell, defaultCells } from '../../../static/board-state';
+import { GameStatus } from '../../static/game-status';
+import { BoardState, Cell } from '../../models/board-state';
+import { defaultCells } from '../../static/initial-state';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

@@ -1,4 +1,4 @@
-import { Cell } from '../static/board-state';
+import { Cell } from '../models/board-state';
 
 export const identifyWinner = (cells: Cell[]): number[] | undefined => {
     const possibleMatchWinner = [

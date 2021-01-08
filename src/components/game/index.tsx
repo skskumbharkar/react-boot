@@ -6,16 +6,15 @@ import { TimeTravelComponent } from 'components/time-travel';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { identifyWinner, isMatchDraw } from 'utils/winner';
 import { BoardState, Cell } from 'models/board-state';
-import { AlertDialogComponent } from '../board/alert';
 import {
     closeAlert,
-    selectCurrentBoard,
-    selectHistoryBoards,
     setupGameStatusDraw,
     setupGameStatusInProgress,
     setupGameStatusWin,
     updateSelectedMove,
-} from './game-slice';
+} from 'stores/game/actions';
+import { selectCurrentBoard, selectHistoryBoards } from 'stores/game/selectors';
+import { AlertDialogComponent } from '../board/alert';
 
 export type GameComponentProps = unknown;
 
@@ -34,7 +33,7 @@ export const GameComponent: React.FC<GameComponentProps> = () => {
     const currentBoard = useSelector(selectCurrentBoard);
     const historyBoards = useSelector(selectHistoryBoards);
 
-    const updateGameHistory = (cells: Cell[], cellIndex: number, board: BoardState) => {
+    const updateGameHistory = (cells: Cell[], cellIndex: number) => {
         const winnerCellLocation = identifyWinner(cells);
         if (winnerCellLocation) {
             dispatch(setupGameStatusWin({ winnerCellLocation, cells, cellIndex }));
@@ -48,9 +47,7 @@ export const GameComponent: React.FC<GameComponentProps> = () => {
     return (
         <Grid container justify="center" className={classes.container} spacing={2}>
             <BoardComponent
-                updateHistory={(cells: Cell[], cellIndex: number) =>
-                    updateGameHistory(cells, cellIndex, currentBoard as BoardState)
-                }
+                updateHistory={(cells: Cell[], cellIndex: number) => updateGameHistory(cells, cellIndex)}
                 currentBoard={currentBoard as BoardState}
             />
             <TimeTravelComponent

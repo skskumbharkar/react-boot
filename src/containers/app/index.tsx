@@ -3,12 +3,8 @@ import { GameComponent } from 'components/game';
 import Grid from '@material-ui/core/Grid';
 import './index.scss';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import { HeaderComponent } from 'components/header';
+import { Routes } from '../../routes';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -35,17 +31,8 @@ export const AppComponent: React.FC<AppProps> = () => {
         <Grid container justify="center">
             <Grid item xs={12}>
                 <div className={classes.root}>
-                    <AppBar position="static">
-                        <Toolbar variant="dense">
-                            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                                <MenuIcon />
-                            </IconButton>
-                            <Typography variant="h6" className={classes.title}>
-                                TIC TAC TOE
-                            </Typography>
-                            <Button color="inherit">Login</Button>
-                        </Toolbar>
-                    </AppBar>
+                    <HeaderComponent />
+                    <Routes />
                 </div>
             </Grid>
             <Grid item xs={12}>

@@ -14,7 +14,7 @@ import {
     updateSelectedMove,
 } from 'stores/game/actions';
 import { selectCurrentBoard, selectHistoryBoards } from 'stores/game/selectors';
-import { AlertDialogComponent } from '../board/alert';
+import { GameStatusAlertComponent } from 'components/game-status-alert';
 
 export type GameComponentProps = unknown;
 
@@ -55,7 +55,7 @@ export const GameComponent: React.FC<GameComponentProps> = () => {
                 updateSelectedMove={(board: BoardState) => dispatch(updateSelectedMove({ currentBoard: board }))}
             />
             {currentBoard?.closeGame?.alertState?.open && (
-                <AlertDialogComponent
+                <GameStatusAlertComponent
                     openDialog={currentBoard?.closeGame?.alertState?.open as boolean}
                     title={currentBoard?.closeGame?.alertState?.title as string}
                     message={currentBoard?.closeGame?.alertState?.message as string}

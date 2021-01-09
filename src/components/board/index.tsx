@@ -5,9 +5,10 @@ import { CellComponent } from 'components/cell';
 import FormLabel from '@material-ui/core/FormLabel';
 import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { GameStatus } from '../../static/game-status';
-import { BoardState, Cell } from '../../models/board-state';
-import { defaultCells } from '../../static/initial-state';
+import { GameStatus } from 'static/game-status';
+import { BoardState, Cell } from 'models/board-state';
+import { defaultCells } from 'static/initial-state';
+import { getFormLabel } from 'helpers/game-form-label';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -33,25 +34,12 @@ export const BoardComponent: React.FC<BoardComponentProps> = ({ currentBoard, up
         }
     };
 
-    const getFormLabel = (): string => {
-        switch (currentBoard?.closeGame?.gameStatus) {
-            case GameStatus.IN_PROGRESS:
-                return `Next Player: ${currentBoard?.nextMovePlayer}, Next move: ${currentBoard?.nextMove}`;
-            case GameStatus.WIN:
-                return `Winner Player: ${currentBoard?.nextMovePlayer}`;
-            case GameStatus.DRAW:
-                return 'Match Draw';
-            default:
-                return `Next Player: ${currentBoard?.nextMovePlayer}, Next move: ${currentBoard?.nextMove}`;
-        }
-    };
-
     return (
         <Grid item xs={4}>
             <Paper className={classes.control} elevation={3}>
                 <Grid container>
                     <Grid item>
-                        <FormLabel>{getFormLabel()}</FormLabel>
+                        <FormLabel>{getFormLabel(currentBoard)}</FormLabel>
                     </Grid>
                 </Grid>
                 <Grid container justify="center" spacing={0}>

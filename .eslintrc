@@ -52,6 +52,7 @@
             {
                 "devDependencies": [".storybook/**", "src/stories/**"]
             }
-        ]
+        ],
+      "import/prefer-default-export": "off"
     }
 }

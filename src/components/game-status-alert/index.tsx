@@ -6,19 +6,19 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export type AlertDialogComponentProps = {
+export type GameStatusAlertComponentProps = {
     openDialog: boolean;
     title: string;
     message: string;
     closeAlert: (open: boolean) => void;
 };
 
-export const AlertDialogComponent: React.FC<AlertDialogComponentProps> = ({
+export const GameStatusAlertComponent: React.FC<GameStatusAlertComponentProps> = ({
     openDialog,
     title,
     message,
     closeAlert,
-}: AlertDialogComponentProps) => {
+}: GameStatusAlertComponentProps) => {
     return (
         <div>
             <Dialog

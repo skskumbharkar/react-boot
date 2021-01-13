@@ -8,7 +8,7 @@ export const setupGameStatusWinReducer = (
     {
         payload: { winnerCellLocation, cells, cellIndex },
     }: PayloadAction<{ winnerCellLocation: number[]; cells: Cell[]; cellIndex: number }>,
-) => {
+): GameState => {
     const currentBoard = {
         ...(state.currentBoard as BoardState),
         key: (state.historyBoards?.length as number) + 1,
@@ -33,7 +33,7 @@ export const setupGameStatusWinReducer = (
 export const setupGameStatusDrawReducer = (
     state: GameState,
     { payload: { cells, cellIndex } }: PayloadAction<{ cells: Cell[]; cellIndex: number }>,
-) => {
+): GameState => {
     const currentBoard = {
         ...(state.currentBoard as BoardState),
         key: (state.historyBoards?.length as number) + 1,
@@ -58,7 +58,7 @@ export const setupGameStatusDrawReducer = (
 export const setupGameStatusInProgressReducer = (
     state: GameState,
     { payload: { cells, cellIndex } }: PayloadAction<{ cells: Cell[]; cellIndex: number }>,
-) => {
+): GameState => {
     const currentBoard = {
         ...(state.currentBoard as BoardState),
         key: (state.historyBoards?.length as number) + 1,
@@ -76,13 +76,16 @@ export const setupGameStatusInProgressReducer = (
 export const updateSelectedMoveReducer = (
     state: GameState,
     { payload: { currentBoard } }: PayloadAction<{ currentBoard: BoardState }>,
-) => {
+): GameState => {
     return {
         ...state,
         currentBoard,
     };
 };
-export const closeAlertReducer = (state: GameState, { payload: { open } }: PayloadAction<{ open: boolean }>) => {
+export const closeAlertReducer = (
+    state: GameState,
+    { payload: { open } }: PayloadAction<{ open: boolean }>,
+): GameState => {
     return {
         ...state,
         currentBoard: {

@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import './index.scss';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { HeaderComponent } from 'components/header';
-import { Routes } from '../../routes';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -32,7 +31,6 @@ export const AppComponent: React.FC<AppProps> = () => {
             <Grid item xs={12}>
                 <div className={classes.root}>
                     <HeaderComponent />
-                    <Routes />
                 </div>
             </Grid>
             <Grid item xs={12}>

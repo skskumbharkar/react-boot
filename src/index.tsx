@@ -1,23 +1,33 @@
 import React from 'react';
 import { hydrate, render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createBrowserHistory, History } from 'history';
+import { History } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
 import { AppComponent } from './containers/app';
-import { store } from './stores';
+import { history, store } from './stores';
 import './index.scss';
 
 import reportWebVitals from './reportWebVitals';
 import 'fontsource-roboto';
+import { Routes } from './routes';
+import { AuthContext } from './static/auth-context';
+import { useAuth } from './hooks/auth';
 
-const onLoad = (history: History) => {
+const onLoad = (routeHistory: History) => {
     const rootElement = document.getElementById('root');
+    // TODO remove suppress error
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const auth = useAuth();
+
     if (rootElement && rootElement.hasChildNodes()) {
         hydrate(
             <React.StrictMode>
                 <Provider store={store}>
-                    <ConnectedRouter history={history}>
-                        <AppComponent />
+                    <ConnectedRouter history={routeHistory}>
+                        <AuthContext.Provider value={auth}>
+                            <Routes />
+                            <AppComponent />
+                        </AuthContext.Provider>
                     </ConnectedRouter>
                 </Provider>
             </React.StrictMode>,
@@ -37,7 +47,6 @@ const onLoad = (history: History) => {
     }
 };
 
-export const history: History = createBrowserHistory();
 onLoad(history);
 
 // If you want to start measuring performance in your app, pass a function

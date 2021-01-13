@@ -1,10 +1,26 @@
-import { Route } from 'models/route';
+import { RouteProp } from 'models/route-prop';
 import { GameComponent } from 'components/game';
 
-const routes: Route[] = [
+const routes: RouteProp[] = [
     {
         key: 'home',
-        path: '/home',
+        path: '/',
+        component: GameComponent,
+        exact: true,
+        strict: true,
+        sensitive: true,
+    },
+    {
+        key: 'game',
+        path: '/game',
+        component: GameComponent,
+        exact: true,
+        strict: true,
+        sensitive: true,
+    },
+    {
+        key: 'all',
+        path: '*',
         component: GameComponent,
         exact: true,
         strict: true,

@@ -5,8 +5,6 @@ import { connectRouter } from 'connected-react-router';
 
 export const history: History = createBrowserHistory();
 
-// TODO https://github.com/supasate/connected-react-router/blob/master/examples/typescript/package.json
-// TODO https://github.com/zsajjad/rtk-demo/blob/master/app/configureStore.js
 export const store = configureStore({
     reducer: combineReducers({
         router: connectRouter(history),

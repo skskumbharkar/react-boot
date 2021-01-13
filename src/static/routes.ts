@@ -9,6 +9,7 @@ const routes: RouteProp[] = [
         exact: true,
         strict: true,
         sensitive: true,
+        isProtected: true,
     },
     {
         key: 'game',
@@ -17,6 +18,25 @@ const routes: RouteProp[] = [
         exact: true,
         strict: true,
         sensitive: true,
+        isProtected: true,
+    },
+    {
+        key: 'login',
+        path: '/login',
+        component: GameComponent,
+        exact: true,
+        strict: true,
+        sensitive: true,
+        isProtected: false,
+    },
+    {
+        key: 'signup',
+        path: '/signup',
+        component: GameComponent,
+        exact: true,
+        strict: true,
+        sensitive: true,
+        isProtected: false,
     },
     {
         key: 'all',

@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import './index.scss';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { HeaderComponent } from 'components/header';
+import { Routes } from '../../routes';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -36,7 +37,7 @@ export const AppComponent: React.FC<AppProps> = () => {
             <Grid item xs={12}>
                 <Grid container justify="center">
                     <Grid item xs={12} className={classes.contents}>
-                        <GameComponent />
+                        <Routes />
                     </Grid>
                 </Grid>
             </Grid>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { IndexComponent } from './index';
 
 test('Render test for index component', async () => {

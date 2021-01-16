@@ -10,7 +10,7 @@ export const MOCK_BOARD = {
         },
     ],
     currentMove: '1,1',
-    nextMove: '1,2',
+    nextMove: 'X',
     nextMovePlayer: 'B',
     closeGame: {
         gameStatus: GameStatus.IN_PROGRESS,

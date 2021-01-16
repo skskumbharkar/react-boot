@@ -49,6 +49,7 @@ export const defaultCells: Cell[] = [
         location: '(3,3)',
     },
 ];
+
 export const InitialBoardState: BoardState = {
     key: 0,
     cells: defaultCells,
@@ -65,6 +66,7 @@ export const InitialBoardState: BoardState = {
         winnerCellLocation: [-1, -1, -1],
     },
 };
+
 export const InitialGameState: GameState = {
     historyBoards: [],
     currentBoard: InitialBoardState,

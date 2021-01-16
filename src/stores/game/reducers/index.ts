@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { GameState } from '../../../models/game-state';
-import { BoardState, Cell } from '../../../models/board-state';
-import { GameStatus } from '../../../static/game-status';
+import { GameState } from 'models/game-state';
+import { BoardState, Cell } from 'models/board-state';
+import { GameStatus } from 'static/game-status';
 
 export const setupGameStatusWinReducer = (
     state: GameState,
@@ -30,6 +30,7 @@ export const setupGameStatusWinReducer = (
         historyBoards: [...(state.historyBoards as BoardState[]), currentBoard as BoardState],
     };
 };
+
 export const setupGameStatusDrawReducer = (
     state: GameState,
     { payload: { cells, cellIndex } }: PayloadAction<{ cells: Cell[]; cellIndex: number }>,
@@ -55,6 +56,7 @@ export const setupGameStatusDrawReducer = (
         historyBoards: [...(state.historyBoards as BoardState[]), currentBoard as BoardState],
     };
 };
+
 export const setupGameStatusInProgressReducer = (
     state: GameState,
     { payload: { cells, cellIndex } }: PayloadAction<{ cells: Cell[]; cellIndex: number }>,
@@ -73,6 +75,7 @@ export const setupGameStatusInProgressReducer = (
         historyBoards: [...(state.historyBoards as BoardState[]), currentBoard as BoardState],
     };
 };
+
 export const updateSelectedMoveReducer = (
     state: GameState,
     { payload: { currentBoard } }: PayloadAction<{ currentBoard: BoardState }>,
@@ -82,6 +85,7 @@ export const updateSelectedMoveReducer = (
         currentBoard,
     };
 };
+
 export const closeAlertReducer = (
     state: GameState,
     { payload: { open } }: PayloadAction<{ open: boolean }>,

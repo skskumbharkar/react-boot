@@ -1,6 +1,7 @@
 import { MOCK_BOARD } from 'static/mock/board';
 import { GameState } from 'models/game-state';
 import { GameStatus } from 'static/game-status';
+import cloneDeep from 'lodash.clonedeep';
 import {
     setupGameStatusWinReducer,
     setupGameStatusDrawReducer,
@@ -9,12 +10,16 @@ import {
     updateSelectedMoveReducer,
 } from './index';
 
+let expectedState: GameState;
+beforeEach(() => {
+    expectedState = {
+        historyBoards: [cloneDeep(MOCK_BOARD)],
+        currentBoard: cloneDeep(MOCK_BOARD),
+    };
+});
+
 test('should return updated state for game win state', () => {
     // Arrange
-    const expectedState: GameState = {
-        historyBoards: [MOCK_BOARD],
-        currentBoard: MOCK_BOARD,
-    };
     expectedState.currentBoard.key = 2;
     expectedState.currentBoard.cells = MOCK_BOARD.cells;
     expectedState.currentBoard.currentMove = MOCK_BOARD.cells[0].location;
@@ -47,10 +52,6 @@ test('should return updated state for game win state', () => {
 
 test('should return updated state for game draw state', () => {
     // Arrange
-    const expectedState: GameState = {
-        historyBoards: [MOCK_BOARD],
-        currentBoard: MOCK_BOARD,
-    };
     expectedState.currentBoard.key = 2;
     expectedState.currentBoard.cells = MOCK_BOARD.cells;
     expectedState.currentBoard.currentMove = MOCK_BOARD.cells[0].location;
@@ -69,7 +70,6 @@ test('should return updated state for game draw state', () => {
         },
         {
             payload: {
-                winnerCellLocation: MOCK_BOARD.closeGame.winnerCellLocation,
                 cells: MOCK_BOARD.cells,
                 cellIndex: 0,
             },
@@ -81,19 +81,8 @@ test('should return updated state for game draw state', () => {
     expect(updatedState).toMatchObject(expectedState);
 });
 
-// TODO Issue with test:
-/*
--   "nextMove": "O",
--   "nextMovePlayer": "A",
-+   "nextMove": "X",
-+   "nextMovePlayer": "B",
-* */
 test('should return updated state for game in-progress state', () => {
     // Arrange
-    const expectedState: GameState = {
-        historyBoards: [MOCK_BOARD],
-        currentBoard: MOCK_BOARD,
-    };
     expectedState.currentBoard.key = 2;
     expectedState.currentBoard.cells = MOCK_BOARD.cells;
     expectedState.currentBoard.currentMove = MOCK_BOARD.cells[0].location;
@@ -122,10 +111,6 @@ test('should return updated state for game in-progress state', () => {
 
 test('should return updated state for selected move', () => {
     // Arrange
-    const expectedState: GameState = {
-        historyBoards: [MOCK_BOARD],
-        currentBoard: MOCK_BOARD,
-    };
 
     // Act
     const updatedState: GameState = updateSelectedMoveReducer(
@@ -147,10 +132,6 @@ test('should return updated state for selected move', () => {
 
 test('should return updated state for close alert state', () => {
     // Arrange
-    const expectedState: GameState = {
-        historyBoards: [MOCK_BOARD],
-        currentBoard: MOCK_BOARD,
-    };
     expectedState.currentBoard.closeGame.alertState.open = true;
     expectedState.currentBoard.closeGame.alertState.title = 'Game Over';
     expectedState.currentBoard.closeGame.alertState.message = 'Winner Player: B';

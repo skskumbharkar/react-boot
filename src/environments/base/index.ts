@@ -13,5 +13,6 @@ export default (baseApi: string): BaseEnv => {
         },
         isProduction: true,
         isDevelopment: false,
+        isQA: false,
     };
 };

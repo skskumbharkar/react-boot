@@ -2,7 +2,6 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { GameState } from 'models/game-state';
 import { BoardState, Cell } from 'models/board-state';
 import { GameStatus } from 'static/game-status';
-import { MOCK_BOARD } from '../../../static/mock/board';
 
 export const setupGameStatusWinReducer = (
     state: GameState,

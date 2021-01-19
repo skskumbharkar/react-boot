@@ -10,4 +10,5 @@ export type BaseEnv = {
     };
     isProduction: boolean;
     isDevelopment: boolean;
+    isQA: boolean;
 };

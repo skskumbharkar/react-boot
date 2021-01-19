@@ -1,10 +1,9 @@
 import React from 'react';
-import { GameComponent } from 'components/game';
 import Grid from '@material-ui/core/Grid';
 import './index.scss';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { HeaderComponent } from 'components/header';
-import { Routes } from '../../routes';
+import { Routes } from 'routes';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

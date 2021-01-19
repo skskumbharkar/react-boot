@@ -15,7 +15,6 @@ test('Render test for routes component', async () => {
     // Arrange
 
     // Action
-    // TODO Mock store and history
     const component = render(
         <Provider store={store}>
             <ConnectedRouter history={history}>

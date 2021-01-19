@@ -3,7 +3,7 @@ import { GameStatus } from 'static/game-status';
 import { getFormLabel } from './index';
 
 test.each([
-    [GameStatus.IN_PROGRESS, 'Next Player: B, Next move: 1,2'],
+    [GameStatus.IN_PROGRESS, 'Next Player: B, Next move: X'],
     [GameStatus.DRAW, 'Match Draw'],
     [GameStatus.WIN, 'Winner Player: B'],
 ])('Render test for getFormLabel with status %s', (input, expected) => {

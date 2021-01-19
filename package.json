@@ -1,5 +1,5 @@
 {
-  "name": "react-sample-project",
+  "name": "react-tic-tac-toe",
   "description": "TIC TAC TOE with time travel",
   "version": "0.1.0",
   "private": true,
@@ -33,6 +33,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "ci": "rm -rf node_modules && yarn install --frozen-lockfile",
     "test": "react-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
     "eject": "react-scripts eject",

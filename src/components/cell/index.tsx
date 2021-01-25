@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 
 export type CellComponentProps = {
+    cellId: string;
     value: string | null;
     handleClick: () => void;
     winingCell: boolean;
@@ -27,13 +28,19 @@ const useStyles = makeStyles({
     },
 });
 
-export const CellComponent: React.FC<CellComponentProps> = ({ value, handleClick, winingCell }: CellComponentProps) => {
+export const CellComponent: React.FC<CellComponentProps> = ({
+    cellId,
+    value,
+    handleClick,
+    winingCell,
+}: CellComponentProps) => {
     const classes = useStyles();
 
     return (
         <Card className={classes.root} variant="outlined">
             <CardContent className={classes.noPadding}>
                 <Button
+                    id={cellId}
                     className={classes.buttonArea}
                     onClick={handleClick}
                     variant={winingCell ? 'contained' : undefined}

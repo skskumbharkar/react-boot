@@ -37,7 +37,9 @@ export const HeaderComponent: React.FC<HeaderComponentProps> = () => {
                 <Typography variant="h6" className={classes.title}>
                     TIC TAC TOE
                 </Typography>
-                <Button color="inherit">Login</Button>
+                <Button id="loginBtn" color="inherit">
+                    Login
+                </Button>
             </Toolbar>
         </AppBar>
     );

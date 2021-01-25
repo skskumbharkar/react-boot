@@ -55,7 +55,7 @@
     "_comment_serve": "Static Server: serve your static site on the port 5000",
     "serve": "serve -s build",
     "size": "yarn build && size-limit",
-    "cypress:run": "cypress run --record --key=${CYPRESS_RECORD_KEY}",
+    "cypress:run": "cypress run --record",
     "ci:cypress-run": "start-server-and-test start http://localhost:3000 cypress:run"
   },
   "browserslist": {

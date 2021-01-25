@@ -50,9 +50,9 @@ jobs:
           file: './coverage/clover.xml'
           token: ${CODECOV_TOKEN}
 
-#      - run:
-#          name: App end to end integration test run
-#          command: yarn ci:cypress-run
+      - run:
+          name: App end to end integration test run
+          command: yarn ci:cypress-run
 
       - run:
           name: Bundle application using react-script

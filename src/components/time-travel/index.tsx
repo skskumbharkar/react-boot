@@ -73,7 +73,9 @@ export const TimeTravelComponent: React.FC<TimeTravelComponentProps> = ({
                                     return (
                                         <TimelineItem key={item.key} className={classes.timelineItem}>
                                             <TimelineOppositeContent>
-                                                <Typography>{`Move : ${index + 1}`}</Typography>
+                                                <Typography id={`move_${index + 1}`}>{`Move : ${
+                                                    index + 1
+                                                }`}</Typography>
                                             </TimelineOppositeContent>
                                             <TimelineSeparator>
                                                 <TimelineDot color={selectedIndex === index ? 'primary' : undefined}>

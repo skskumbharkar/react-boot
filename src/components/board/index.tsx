@@ -47,6 +47,7 @@ export const BoardComponent: React.FC<BoardComponentProps> = ({ currentBoard, up
                         <Grid item xs={4} key={`container_${item.key}`}>
                             <CellComponent
                                 key={`cell_${item.key}`}
+                                cellId={`cell_${item.key}`}
                                 value={item.value}
                                 handleClick={() => handleCellClick(item.value, index)}
                                 winingCell={

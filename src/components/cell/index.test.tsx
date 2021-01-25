@@ -6,7 +6,7 @@ test('Render test for cell component', async () => {
     // Arrange
 
     // Action
-    const component = render(<CellComponent value="X" handleClick={jest.fn} winingCell />);
+    const component = render(<CellComponent cellId="123" value="X" handleClick={jest.fn} winingCell />);
 
     // Assert
     expect(component).toBeDefined();

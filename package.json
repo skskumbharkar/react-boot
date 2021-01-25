@@ -36,7 +36,7 @@
     "ci": "rm -rf node_modules && yarn install --frozen-lockfile",
     "test": "react-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
-    "test:ci": "react-scripts test --ci --coverage --reporters=default --reporters=jest-junit",
+    "test:ci": "react-scripts test --ci --coverage",
     "eject": "react-scripts eject",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx,json,css,scss,md}",
     "lint": "tsc --noEmit && eslint \"src/**/*.{js,jsx,ts,tsx}\"",

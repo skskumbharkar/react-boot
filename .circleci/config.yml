@@ -2,8 +2,9 @@ version: 2.1
 orbs:
   snyk: snyk/snyk@0.0.8
   cypress: cypress-io/cypress@1.23.0
+  codecov: codecov/codecov@1.0.2
 jobs:
-  build:
+  app-ci-build:
     docker:
       - image: circleci/node:12.9.1-browsers
 
@@ -17,7 +18,9 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
 
-      - run: yarn install
+      - run:
+          name: Install dependancies
+          command: yarn install
 
       - save_cache:
           paths:
@@ -31,12 +34,26 @@ jobs:
           monitor-on-build: false
           severity-threshold: high
 
-      - run: yarn lint
+      - run:
+          name: Linting for src code base
+          command: yarn lint
 
-      - run: yarn size
+      - run:
+          name: App size, loading and running time inspection
+          command: yarn size
 
-      - run: yarn test
+      - run:
+          name: App unit test using Jest
+          command: yarn test:ci
 
-      - run: yarn ci:cypress-run
+      - codecov/upload:
+          file: './coverage/clover.xml'
+          token: ${CODECOV_TOKEN}
 
-      - run: yarn build
+      - run:
+          name: App end to end integration test run
+          command: yarn ci:cypress-run
+
+      - run:
+          name: Bundle application using react-script
+          command: yarn build

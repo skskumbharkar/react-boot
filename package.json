@@ -50,10 +50,12 @@
     "predeploy": "yarn build",
     "_comment_deploy": "Publish/deploy site/build to github pages",
     "deploy": "gh-pages -d build",
-    "_comment_postbuild": "Pre-Rendering into Static HTML Files",
-    "postbuild": "react-snap",
+    "_comment_postbuild": "react-snap",
     "_comment_serve": "Static Server: serve your static site on the port 5000",
-    "serve": "serve -s build"
+    "serve": "serve -s build",
+    "size": "yarn build && size-limit",
+    "cypress:run": "cypress run --record --key=${CYPRESS_RECORD_KEY}",
+    "ci:cypress-run": "start-server-and-test start http://localhost:3000 cypress:run"
   },
   "browserslist": {
     "production": [
@@ -69,6 +71,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
+    "@size-limit/preset-app": "^4.9.1",
     "@storybook/addon-actions": "^6.0.27",
     "@storybook/addon-essentials": "^6.0.27",
     "@storybook/addon-links": "^6.0.27",
@@ -85,6 +88,7 @@
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
     "babel-loader": "8.1.0",
+    "cypress": "^6.3.0",
     "eslint-config-airbnb": "18.2.0",
     "eslint-config-airbnb-typescript": "^12.0.0",
     "eslint-config-prettier": "^6.14.0",
@@ -100,10 +104,16 @@
     "react-is": "^17.0.1",
     "react-snap": "^1.23.0",
     "react-styleguidist": "^11.1.1",
-    "source-map-explorer": "^2.5.0"
+    "source-map-explorer": "^2.5.0",
+    "start-server-and-test": "^1.11.7"
   },
   "_comment_proxy": "Proxying API Requests in Development",
   "_commented_proxy": "http://localhost:4000",
   "_comment_homepage": "Building for Relative Paths, correctly infer the root path to use in the generated HTML file,",
-  "_commented_homepage": "https://skskumbharkar.github.io/github-issues/"
+  "_commented_homepage": "https://skskumbharkar.github.io/github-issues/",
+  "size-limit": [
+    {
+      "path": "build/static/**/*.{js,css,svg,woff,woff2,png,ttf,html}"
+    }
+  ]
 }

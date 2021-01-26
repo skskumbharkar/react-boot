@@ -83,6 +83,5 @@ workflows:
           requires:
             - app-ci-build
           filters:
-            branches:
-              only:
-                - release
+            tags:
+              only: /^v.*/

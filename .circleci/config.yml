@@ -20,11 +20,6 @@ jobs:
             - v1-dependencies-
 
   setup:
-    docker:
-      - image: circleci/node:12.9.1-browsers
-
-    working_directory: ~/repo
-
     steps:
       - run:
           name: Install dependancies
@@ -38,11 +33,6 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
   scan:
-    docker:
-      - image: circleci/node:12.9.1-browsers
-
-    working_directory: ~/repo
-
     steps:
       - snyk/scan:
           fail-on-issues: false
@@ -50,22 +40,12 @@ jobs:
           severity-threshold: high
 
   lint:
-    docker:
-      - image: circleci/node:12.9.1-browsers
-
-    working_directory: ~/repo
-
     steps:
       - run:
           name: Linting for src code base
           command: yarn lint
 
   size:
-    docker:
-      - image: circleci/node:12.9.1-browsers
-
-    working_directory: ~/repo
-
     steps:
       - run:
           name: App size, loading and running time inspection
@@ -123,7 +103,7 @@ jobs:
 
     steps:
       - aws-s3/sync:
-          from: app-ci-build
+          from: build
           to: 's3://github-issues-app/'
           arguments: |
             --acl public-read \

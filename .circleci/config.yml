@@ -115,7 +115,7 @@ jobs:
           name: Bundle application using react-script
           command: yarn build
 
-  deploy:
+deploy:
     docker:
       - image: circleci/node:12.9.1
 

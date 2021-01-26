@@ -87,7 +87,7 @@ workflows:
   app_workflow:
     jobs:
       - app-ci-build
-      - app-ci-deployment
+      - app-ci-deploy:
           requires:
             - app-ci-build
           filters:

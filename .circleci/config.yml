@@ -140,59 +140,28 @@ workflows:
             - checkout
       - scan:
           requires:
-            - checkout
             - setup
       - lint:
           requires:
-            - checkout
             - setup
       - size:
           requires:
-            - checkout
             - setup
       - test:
           requires:
-            - checkout
-            - setup
             - scan
             - lint
       - codecov:
           requires:
-            - checkout
-            - setup
-            - scan
-            - lint
-            - size
             - test
       - e2e:
           requires:
-            - checkout
-            - setup
-            - scan
-            - lint
-            - size
-            - test
             - codecov
       - build:
           requires:
-            - checkout
-            - setup
-            - scan
-            - lint
-            - size
-            - test
-            - codecov
             - e2e
       - deploy:
           requires:
-            - checkout
-            - setup
-            - scan
-            - lint
-            - size
-            - test
-            - codecov
-            - e2e
             - build
           filters:
             branches:

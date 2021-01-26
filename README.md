@@ -1,10 +1,10 @@
 # Github issues
 
 [![GitHub license](https://img.shields.io/github/license/skskumbharkar/github-issues)](https://github.com/skskumbharkar/github-issues/blob/main/LICENSE)
-![CircleCI](https://img.shields.io/circleci/build/github/skskumbharkar/github-issues?color=green)
-![Codecov](https://img.shields.io/codecov/c/gh/skskumbharkar/github-issues?color=orange)
-![issues](https://img.shields.io/github/issues/skskumbharkar/github-issues?color=blue)
-![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/skskumbharkar/github-issues)
+[![CircleCI](https://img.shields.io/circleci/build/github/skskumbharkar/github-issues?color=green)](https://app.circleci.com/pipelines/github/skskumbharkar/github-issues)
+[![Codecov](https://img.shields.io/codecov/c/gh/skskumbharkar/github-issues?color=orange)](https://codecov.io/gh/skskumbharkar/github-issues)
+[![issues](https://img.shields.io/github/issues/skskumbharkar/github-issues?color=blue)](https://github.com/skskumbharkar/github-issues/issues)
+[![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/skskumbharkar/github-issues)](https://app.snyk.io/org/skskumbharkar/project/88713e92-0788-4778-8cdc-5c22042118cd)
 
 ## Available Scripts
 

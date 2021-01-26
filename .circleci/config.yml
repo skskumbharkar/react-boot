@@ -3,6 +3,7 @@ orbs:
   snyk: snyk/snyk@0.0.8
   cypress: cypress-io/cypress@1.23.0
   codecov: codecov/codecov@1.0.2
+  aws-s3: circleci/aws-s3@1.0.11
 jobs:
   app-ci-build:
     docker:
@@ -58,8 +59,38 @@ jobs:
           name: Bundle application using react-script
           command: yarn build
 
+      - aws-s3/sync:
+          from: build
+          to: 's3://cra-ci-demo/'
+          arguments: |
+            --acl public-read \
+            --cache-control "max-age=86400"
+          overwrite: true
+
+  app-ci-deploy:
+    docker:
+      - image: circleci/node:12.9.1
+
+    working_directory: ~/repo
+
+    steps:
+      - aws-s3/sync:
+          from: app-ci-build
+          to: 's3://github-issues-app/'
+          arguments: |
+            --acl public-read \
+            --cache-control "max-age=86400"
+          overwrite: true
+
 workflows:
   version: 2
-  Example_Workflow:
+  app_workflow:
     jobs:
       - app-ci-build
+      - app-ci-deployment
+          requires:
+            - app-ci-build
+          filters:
+            branches:
+              only:
+                - release

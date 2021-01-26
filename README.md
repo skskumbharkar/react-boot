@@ -1,5 +1,6 @@
 # Github issues
 
+[![GitHub license](https://img.shields.io/github/license/skskumbharkar/github-issues)](https://github.com/skskumbharkar/github-issues/blob/main/LICENSE)
 ![CircleCI](https://img.shields.io/circleci/build/github/skskumbharkar/github-issues?color=green)
 ![Codecov](https://img.shields.io/codecov/c/gh/skskumbharkar/github-issues?color=orange)
 ![issues](https://img.shields.io/github/issues/skskumbharkar/github-issues?color=blue)

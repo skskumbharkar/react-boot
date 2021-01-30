@@ -33,6 +33,7 @@ jobs:
             - node_modules
             - ~/.npm
             - ~/.cache
+            - .cache/Cypress
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - persist_to_workspace:
@@ -54,8 +55,8 @@ jobs:
       - run: ls -l ~/repo
 
       - snyk/scan:
-          fail-on-issues: false
-          monitor-on-build: false
+          fail-on-issues: true
+          monitor-on-build: true
           severity-threshold: high
 
       - run:
@@ -65,10 +66,6 @@ jobs:
       - run:
           name: App size, loading and running time inspection
           command: yarn size
-
-      - persist_to_workspace:
-          root: .
-          paths: .
 
   test:
     docker:
@@ -95,10 +92,6 @@ jobs:
       - run:
           name: App end to end integration test run
           command: yarn ci:cypress-run
-
-      - persist_to_workspace:
-          root: .
-          paths: .
 
   build:
     docker:
@@ -143,10 +136,6 @@ jobs:
             --acl public-read \
             --cache-control "max-age=86400"
           overwrite: true
-
-      - persist_to_workspace:
-          root: .
-          paths: .
 
 workflows:
   version: 2

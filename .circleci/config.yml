@@ -1,11 +1,13 @@
 version: 2.1
+
 orbs:
   snyk: snyk/snyk@0.0.8
   cypress: cypress-io/cypress@1.23.0
   codecov: codecov/codecov@1.0.2
   aws-s3: circleci/aws-s3@1.0.11
+
 jobs:
-  checkout:
+  setup:
     docker:
       - image: circleci/node:12.9.1-browsers
 
@@ -22,24 +24,6 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
 
-      - persist_to_workspace:
-          root: .
-          paths: .
-
-  setup:
-    docker:
-      - image: circleci/node:12.9.1-browsers
-
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
-      - attach_workspace:
-          at: ~/repo
-
-      - run: ls -l ~/repo
-
       - run:
           name: Install dependancies
           command: yarn install
@@ -55,7 +39,7 @@ jobs:
           root: .
           paths: .
 
-  scan:
+  monitor:
     docker:
       - image: circleci/node:12.9.1-browsers
 
@@ -74,45 +58,9 @@ jobs:
           monitor-on-build: false
           severity-threshold: high
 
-      - persist_to_workspace:
-          root: .
-          paths: .
-
-  lint:
-    docker:
-      - image: circleci/node:12.9.1-browsers
-
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
-      - attach_workspace:
-          at: ~/repo
-
-      - run: ls -l ~/repo
-
       - run:
           name: Linting for src code base
           command: yarn lint
-
-      - persist_to_workspace:
-          root: .
-          paths: .
-
-  size:
-    docker:
-      - image: circleci/node:12.9.1-browsers
-
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
-      - attach_workspace:
-          at: ~/repo
-
-      - run: ls -l ~/repo
 
       - run:
           name: App size, loading and running time inspection
@@ -140,45 +88,9 @@ jobs:
           name: App unit test using Jest
           command: yarn test:ci
 
-      - persist_to_workspace:
-          root: .
-          paths: .
-
-  codecov:
-    docker:
-      - image: circleci/node:12.9.1-browsers
-
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
-      - attach_workspace:
-          at: ~/repo
-
-      - run: ls -l ~/repo
-
       - codecov/upload:
           file: './coverage/clover.xml'
           token: ${CODECOV_TOKEN}
-
-      - persist_to_workspace:
-          root: .
-          paths: .
-
-  e2e:
-    docker:
-      - image: circleci/node:12.9.1-browsers
-
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
-      - attach_workspace:
-          at: ~/repo
-
-      - run: ls -l ~/repo
 
       - run:
           name: App end to end integration test run
@@ -240,32 +152,16 @@ workflows:
   version: 2
   app_workflow:
     jobs:
-      - checkout
-      - setup:
-          requires:
-            - checkout
-      - scan:
-          requires:
-            - setup
-      - lint:
-          requires:
-            - setup
-      - size:
+      - setup
+      - monitor:
           requires:
             - setup
       - test:
           requires:
-            - scan
-            - lint
-      - codecov:
-          requires:
-            - test
-      - e2e:
-          requires:
-            - codecov
+            - setup
       - build:
           requires:
-            - e2e
+            - test
       - deploy:
           requires:
             - build

@@ -28,7 +28,9 @@ jobs:
           name: Install dependancies
           command: yarn ci
 
-      - run: yarn cy:verify
+      - run: 
+          name: Cypress verify
+          command: yarn cy:verify
 
       - save_cache:
           paths:
@@ -79,7 +81,7 @@ jobs:
     working_directory: ~/repo
 
     environment:
-      CYPRESS_CACHE_FOLDER: ./node_modules/cypress/cache/Cypress
+      CYPRESS_CACHE_FOLDER: /home/circleci/.cache/Cypress/6.3.0/Cypress
 
     steps:
       - checkout

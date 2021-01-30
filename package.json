@@ -3,6 +3,9 @@
   "description": "TIC TAC TOE with time travel",
   "version": "0.1.0",
   "private": true,
+  "resolutions": {
+    "immer": "^8.0.1"
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",

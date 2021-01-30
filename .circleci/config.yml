@@ -26,14 +26,15 @@ jobs:
 
       - run:
           name: Install dependancies
-          command: yarn install
+          command: yarn ci
+
+      - run: yarn cy:verify
 
       - save_cache:
           paths:
             - node_modules
             - ~/.npm
             - ~/.cache
-            - /home/circleci/.cache/Cypress
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - persist_to_workspace:
@@ -78,7 +79,7 @@ jobs:
     working_directory: ~/repo
 
     environment:
-      CYPRESS_CACHE_FOLDER: /home/circleci/.cache/Cypress
+      CYPRESS_CACHE_FOLDER: ./node_modules/cypress/cache/Cypress
 
     steps:
       - checkout

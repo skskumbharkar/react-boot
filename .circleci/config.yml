@@ -48,7 +48,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - persist_to_workspace:
-          root: ./repo
+          root: /home/circleci/repo
           paths: ./**
 
   monitor:
@@ -79,7 +79,7 @@ jobs:
           command: yarn size
 
       - persist_to_workspace:
-          root: ./repo
+          root: /home/circleci/repo
           paths: ./**
 
   test:
@@ -121,7 +121,7 @@ jobs:
           command: yarn ci:cypress-run
 
       - persist_to_workspace:
-          root: ./repo
+          root: /home/circleci/repo
           paths: ./**
 
   build:
@@ -143,7 +143,7 @@ jobs:
           command: yarn build
 
       - persist_to_workspace:
-          root: ./repo
+          root: /home/circleci/repo
           paths: ./**
 
   deploy:
@@ -169,7 +169,7 @@ jobs:
           overwrite: true
 
       - persist_to_workspace:
-          root: ./repo
+          root: /home/circleci/repo
           paths: ./**
 
 workflows:

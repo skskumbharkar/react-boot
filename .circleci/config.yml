@@ -15,7 +15,7 @@ jobs:
 
     environment:
       CYPRESS_INSTALL_BINARY: /home/circleci/.cache/Cypress/6.3.0/Cypress
-      CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
+      CYPRESS_CACHE_FOLDER: /home/circleci/.cache/Cypress
 
     steps:
       - checkout
@@ -45,6 +45,7 @@ jobs:
             - node_modules
             - ~/.npm
             - ~/.cache
+            - /home/circleci/.cache/Cypress
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - persist_to_workspace:
@@ -90,7 +91,7 @@ jobs:
 
     environment:
       CYPRESS_INSTALL_BINARY: /home/circleci/.cache/Cypress/6.3.0/Cypress
-      CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
+      CYPRESS_CACHE_FOLDER: /home/circleci/.cache/Cypress
 
     steps:
       - checkout

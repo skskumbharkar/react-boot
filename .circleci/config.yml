@@ -14,8 +14,8 @@ jobs:
     working_directory: ~/repo
 
     environment:
-      CYPRESS_INSTALL_BINARY: '/home/circleci/.cache/Cypress/6.3.0/Cypress'
-      CYPRESS_CACHE_FOLDER: '~/.cache/Cypress'
+      CYPRESS_INSTALL_BINARY: /home/circleci/.cache/Cypress/6.3.0/Cypress
+      CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
 
     steps:
       - checkout
@@ -89,8 +89,8 @@ jobs:
     working_directory: ~/repo
 
     environment:
-      CYPRESS_INSTALL_BINARY: '/home/circleci/.cache/Cypress/6.3.0/Cypress'
-      CYPRESS_CACHE_FOLDER: '~/.cache/Cypress'
+      CYPRESS_INSTALL_BINARY: /home/circleci/.cache/Cypress/6.3.0/Cypress
+      CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
 
     steps:
       - checkout

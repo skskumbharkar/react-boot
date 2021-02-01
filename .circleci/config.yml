@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   snyk: snyk/snyk@0.0.8
-  cypress: cypress-io/cypress@1.23.0
+  cypress: cypress-io/cypress@1.26.0
   codecov: codecov/codecov@1.0.2
   aws-s3: circleci/aws-s3@1.0.11
 
@@ -12,6 +12,10 @@ jobs:
       - image: circleci/node:12.9.1-browsers
 
     working_directory: ~/repo
+
+    environment:
+      CYPRESS_INSTALL_BINARY: '/home/circleci/.cache/Cypress/6.3.0/Cypress'
+      CYPRESS_CACHE_FOLDER: '~/.cache/Cypress'
 
     steps:
       - checkout
@@ -32,9 +36,9 @@ jobs:
           name: Cypress verify
           command: yarn cy:verify
 
-      - run:
-          name: App end to end integration test run
-          command: yarn ci:cypress-run
+      - run: 
+          name: Cypress info
+          command: yarn cy:info
 
       - save_cache:
           paths:
@@ -85,7 +89,8 @@ jobs:
     working_directory: ~/repo
 
     environment:
-      CYPRESS_CACHE_FOLDER: /home/circleci/repo/cypress
+      CYPRESS_INSTALL_BINARY: '/home/circleci/.cache/Cypress/6.3.0/Cypress'
+      CYPRESS_CACHE_FOLDER: '~/.cache/Cypress'
 
     steps:
       - checkout
@@ -102,6 +107,14 @@ jobs:
       - codecov/upload:
           file: './coverage/clover.xml'
           token: ${CODECOV_TOKEN}
+
+      - run: 
+          name: Cypress verify
+          command: yarn cy:verify
+
+      - run: 
+          name: Cypress info
+          command: yarn cy:info
 
       - run:
           name: App end to end integration test run

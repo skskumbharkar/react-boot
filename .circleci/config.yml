@@ -48,8 +48,8 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - persist_to_workspace:
-          root: .
-          paths: .
+          root: ./repo
+          paths: ./**
 
   monitor:
     docker:
@@ -79,8 +79,8 @@ jobs:
           command: yarn size
 
       - persist_to_workspace:
-          root: .
-          paths: .
+          root: ./repo
+          paths: ./**
 
   test:
     docker:
@@ -121,8 +121,8 @@ jobs:
           command: yarn ci:cypress-run
 
       - persist_to_workspace:
-          root: .
-          paths: .
+          root: ./repo
+          paths: ./**
 
   build:
     docker:
@@ -143,8 +143,8 @@ jobs:
           command: yarn build
 
       - persist_to_workspace:
-          root: .
-          paths: .
+          root: ./repo
+          paths: ./**
 
   deploy:
     docker:
@@ -169,8 +169,8 @@ jobs:
           overwrite: true
 
       - persist_to_workspace:
-          root: .
-          paths: .
+          root: ./repo
+          paths: ./**
 
 workflows:
   version: 2

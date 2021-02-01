@@ -28,6 +28,11 @@ jobs:
           name: Install dependancies
           command: yarn ci
 
+      # Getting following error for cypress run:
+      # - You're caching 'node_modules' but are not caching this path: /home/circleci/.cache/Cypress
+      # - You ran 'npm install' at an earlier build step but did not persist: /home/circleci/.cache/Cypress
+      # Hence running e2e tests at setup job.
+      # Nothing good solution as such yet; https://github.com/cypress-io/cypress/issues/2634
       - run: 
           name: Cypress verify
           command: yarn cy:verify
@@ -36,12 +41,15 @@ jobs:
           name: Cypress info
           command: yarn cy:info
 
+      - run:
+          name: App end to end integration test run
+          command: yarn ci:cypress-run
+
       - save_cache:
           paths:
             - node_modules
             - ~/.npm
             - ~/.cache
-            - /home/circleci/.cache/Cypress
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - persist_to_workspace:
@@ -95,20 +103,6 @@ jobs:
       - attach_workspace:
           at: ~/repo
 
-      - run: ls -l ~/repo
-
-      - run: cd ./cypress
-
-      - run: ls -l ~/repo
-
-      - run: cd ../
-
-# Getting following error for cypress run:
-# - You're caching 'node_modules' but are not caching this path: /home/circleci/.cache/Cypress
-# - You ran 'npm install' at an earlier build step but did not persist: /home/circleci/.cache/Cypress
-# Hence yarn install added here.
-# Nothing good solution as such yet; https://github.com/cypress-io/cypress/issues/2634
-
       - run:
           name: App unit test using Jest
           command: yarn test:ci
@@ -116,18 +110,6 @@ jobs:
       - codecov/upload:
           file: './coverage/clover.xml'
           token: ${CODECOV_TOKEN}
-
-      - run: 
-          name: Cypress verify
-          command: yarn cy:verify
-
-      - run: 
-          name: Cypress info
-          command: yarn cy:info
-
-      - run:
-          name: App end to end integration test run
-          command: yarn ci:cypress-run
 
       - persist_to_workspace:
           root: .

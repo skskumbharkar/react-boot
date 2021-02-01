@@ -49,8 +49,10 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - persist_to_workspace:
-          root: /home/circleci/repo
-          paths: /home/circleci/.cache/Cypress
+          root: .
+          paths:
+            - node_modules/*
+            - cypress/*
 
   monitor:
     docker:
@@ -80,8 +82,10 @@ jobs:
           command: yarn size
 
       - persist_to_workspace:
-          root: /home/circleci/repo
-          paths: /home/circleci/.cache/Cypress
+          root: .
+          paths:
+            - node_modules/*
+            - cypress/*
 
   test:
     docker:
@@ -122,8 +126,10 @@ jobs:
           command: yarn ci:cypress-run
 
       - persist_to_workspace:
-          root: /home/circleci/repo
-          paths: /home/circleci/.cache/Cypress
+          root: .
+          paths:
+            - node_modules/*
+            - cypress/*
 
   build:
     docker:
@@ -144,8 +150,10 @@ jobs:
           command: yarn build
 
       - persist_to_workspace:
-          root: /home/circleci/repo
-          paths: /home/circleci/.cache/Cypress
+          root: .
+          paths:
+            - node_modules/*
+            - cypress/*
 
   deploy:
     docker:
@@ -170,8 +178,10 @@ jobs:
           overwrite: true
 
       - persist_to_workspace:
-          root: /home/circleci/repo
-          paths: /home/circleci/.cache/Cypress
+          root: .
+          paths:
+            - node_modules/*
+            - cypress/*
 
 workflows:
   version: 2

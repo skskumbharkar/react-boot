@@ -13,10 +13,6 @@ jobs:
 
     working_directory: ~/repo
 
-    environment:
-      CYPRESS_INSTALL_BINARY: /home/circleci/.cache/Cypress/6.3.0/Cypress
-      CYPRESS_CACHE_FOLDER: /home/circleci/.cache/Cypress
-
     steps:
       - checkout
 
@@ -100,6 +96,15 @@ jobs:
           at: ~/repo
 
       - run: ls -l ~/repo
+
+# Getting following error for cypress run:
+# - You're caching 'node_modules' but are not caching this path: /home/circleci/.cache/Cypress
+# - You ran 'npm install' at an earlier build step but did not persist: /home/circleci/.cache/Cypress
+# Hence yarn install added here.
+# Nothing good solution as such yet; https://github.com/cypress-io/cypress/issues/2634
+      - run:
+          name: Install dependancies
+          command: yarn ci
 
       - run:
           name: App unit test using Jest

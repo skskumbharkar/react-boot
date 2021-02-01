@@ -85,7 +85,7 @@ jobs:
     working_directory: ~/repo
 
     environment:
-      CYPRESS_CACHE_FOLDER: /home/circleci/.cache/Cypress/6.3.0/Cypress
+      CYPRESS_CACHE_FOLDER: /home/circleci/repo/cypress
 
     steps:
       - checkout

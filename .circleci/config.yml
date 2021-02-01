@@ -50,9 +50,7 @@ jobs:
 
       - persist_to_workspace:
           root: .
-          paths:
-            - node_modules/*
-            - cypress/*
+          paths: ./**
 
   monitor:
     docker:
@@ -83,9 +81,7 @@ jobs:
 
       - persist_to_workspace:
           root: .
-          paths:
-            - node_modules/*
-            - cypress/*
+          paths: ./**
 
   test:
     docker:
@@ -127,9 +123,7 @@ jobs:
 
       - persist_to_workspace:
           root: .
-          paths:
-            - node_modules/*
-            - cypress/*
+          paths: ./**
 
   build:
     docker:
@@ -151,9 +145,7 @@ jobs:
 
       - persist_to_workspace:
           root: .
-          paths:
-            - node_modules/*
-            - cypress/*
+          paths: ./**
 
   deploy:
     docker:
@@ -179,9 +171,7 @@ jobs:
 
       - persist_to_workspace:
           root: .
-          paths:
-            - node_modules/*
-            - cypress/*
+          paths: ./**
 
 workflows:
   version: 2

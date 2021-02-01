@@ -50,7 +50,7 @@ jobs:
 
       - persist_to_workspace:
           root: /home/circleci/repo
-          paths: ./**
+          paths: /home/circleci/.cache/Cypress
 
   monitor:
     docker:
@@ -81,7 +81,7 @@ jobs:
 
       - persist_to_workspace:
           root: /home/circleci/repo
-          paths: ./**
+          paths: /home/circleci/.cache/Cypress
 
   test:
     docker:
@@ -123,7 +123,7 @@ jobs:
 
       - persist_to_workspace:
           root: /home/circleci/repo
-          paths: ./**
+          paths: /home/circleci/.cache/Cypress
 
   build:
     docker:
@@ -145,7 +145,7 @@ jobs:
 
       - persist_to_workspace:
           root: /home/circleci/repo
-          paths: ./**
+          paths: /home/circleci/.cache/Cypress
 
   deploy:
     docker:
@@ -171,7 +171,7 @@ jobs:
 
       - persist_to_workspace:
           root: /home/circleci/repo
-          paths: ./**
+          paths: /home/circleci/.cache/Cypress
 
 workflows:
   version: 2

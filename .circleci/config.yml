@@ -26,11 +26,15 @@ jobs:
 
       - run:
           name: Install dependancies
-          command: yarn ci && cypress install
+          command: yarn ci
 
       - run: 
           name: Cypress verify
           command: yarn cy:verify
+
+      - run:
+          name: App end to end integration test run
+          command: yarn ci:cypress-run
 
       - save_cache:
           paths:

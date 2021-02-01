@@ -3,6 +3,9 @@
   "description": "TIC TAC TOE with time travel",
   "version": "0.1.0",
   "private": true,
+  "resolutions": {
+    "immer": "^8.0.1"
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
@@ -56,7 +59,9 @@
     "serve": "serve -s build",
     "size": "yarn build && size-limit",
     "cypress:run": "cypress run --record",
-    "ci:cypress-run": "start-server-and-test start http://localhost:3000 cypress:run"
+    "ci:cypress-run": "start-server-and-test start http://localhost:3000 cypress:run",
+    "cy:verify": "cypress verify",
+    "cy:info": "cypress info"
   },
   "browserslist": {
     "production": [

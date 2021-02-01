@@ -1,0 +1,14 @@
+version: v1.5.0
+ignore:
+    SNYK-JS-NODESASS-535500:
+    - '* > node-sass':
+        reason: 'No remediation available'
+        expires: '2021-12-31'
+    SNYK-JS-NODESASS-540996:
+    - '* > node-sass':
+        reason: 'No remediation available'
+        expires: '2021-12-31'
+    SNYK-JS-NODESASS-541000:
+    - '* > node-sass':
+        reason: 'No remediation available'
+        expires: '2021-12-31'

@@ -1,11 +1,13 @@
 version: 2.1
+
 orbs:
   snyk: snyk/snyk@0.0.8
-  cypress: cypress-io/cypress@1.23.0
+  cypress: cypress-io/cypress@1.26.0
   codecov: codecov/codecov@1.0.2
   aws-s3: circleci/aws-s3@1.0.11
+
 jobs:
-  app-ci-build:
+  setup:
     docker:
       - image: circleci/node:12.9.1-browsers
 
@@ -14,6 +16,9 @@ jobs:
     steps:
       - checkout
 
+      - attach_workspace:
+          at: ~/repo
+
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
@@ -21,7 +26,24 @@ jobs:
 
       - run:
           name: Install dependancies
-          command: yarn install
+          command: yarn ci
+
+      # Getting following error for cypress run:
+      # - You're caching 'node_modules' but are not caching this path: /home/circleci/.cache/Cypress
+      # - You ran 'npm install' at an earlier build step but did not persist: /home/circleci/.cache/Cypress
+      # Hence running e2e tests at setup job.
+      # Nothing good solution as such yet; https://github.com/cypress-io/cypress/issues/2634
+      - run: 
+          name: Cypress verify
+          command: yarn cy:verify
+
+      - run: 
+          name: Cypress info
+          command: yarn cy:info
+
+      - run:
+          name: App end to end integration test run
+          command: yarn ci:cypress-run
 
       - save_cache:
           paths:
@@ -30,9 +52,27 @@ jobs:
             - ~/.cache
           key: v1-dependencies-{{ checksum "package.json" }}
 
+      - persist_to_workspace:
+          root: .
+          paths: ./**
+
+  monitor:
+    docker:
+      - image: circleci/node:12.9.1-browsers
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - attach_workspace:
+          at: ~/repo
+
+      - run: ls -l ~/repo
+
       - snyk/scan:
-          fail-on-issues: false
-          monitor-on-build: false
+          fail-on-issues: true
+          monitor-on-build: true
           severity-threshold: high
 
       - run:
@@ -43,6 +83,26 @@ jobs:
           name: App size, loading and running time inspection
           command: yarn size
 
+      - persist_to_workspace:
+          root: .
+          paths: ./**
+
+  test:
+    docker:
+      - image: circleci/node:12.9.1-browsers
+
+    working_directory: ~/repo
+
+    environment:
+      CYPRESS_INSTALL_BINARY: /home/circleci/repo/node_modules/cypress
+      CYPRESS_CACHE_FOLDER: /home/circleci/repo/node_modules/cypress
+
+    steps:
+      - checkout
+
+      - attach_workspace:
+          at: ~/repo
+
       - run:
           name: App unit test using Jest
           command: yarn test:ci
@@ -51,38 +111,77 @@ jobs:
           file: './coverage/clover.xml'
           token: ${CODECOV_TOKEN}
 
-      - run:
-          name: App end to end integration test run
-          command: yarn ci:cypress-run
+      - persist_to_workspace:
+          root: .
+          paths: ./**
+
+  build:
+    docker:
+      - image: circleci/node:12.9.1-browsers
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - attach_workspace:
+          at: ~/repo
+
+      - run: ls -l ~/repo
 
       - run:
           name: Bundle application using react-script
           command: yarn build
 
-  app-ci-deploy:
+      - persist_to_workspace:
+          root: .
+          paths: ./**
+
+  deploy:
     docker:
       - image: circleci/node:12.9.1
 
     working_directory: ~/repo
 
     steps:
+      - checkout
+
+      - attach_workspace:
+          at: ~/repo
+
+      - run: ls -l ~/repo
+
       - aws-s3/sync:
-          from: app-ci-build
+          from: build
           to: 's3://github-issues-app/'
           arguments: |
             --acl public-read \
             --cache-control "max-age=86400"
           overwrite: true
 
+      - persist_to_workspace:
+          root: .
+          paths: ./**
+
 workflows:
   version: 2
   app_workflow:
     jobs:
-      - app-ci-build
-      - app-ci-deploy:
+      - setup
+      - monitor:
           requires:
-            - app-ci-build
+            - setup
+      - test:
+          requires:
+            - setup
+      - build:
+          requires:
+            - test
+      - deploy:
+          requires:
+            - build
           filters:
             branches:
-              only:
-                - release
+              only: main
+            tags:
+              only: /^v.*/

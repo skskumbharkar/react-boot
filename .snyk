@@ -12,3 +12,7 @@ ignore:
     - '* > node-sass':
         reason: 'No remediation available'
         expires: '2021-12-31'
+    SNYK-JS-NODESASS-540956:
+    - '* > node-sass':
+        reason: 'No remediation available'
+        expires: '2021-12-31'

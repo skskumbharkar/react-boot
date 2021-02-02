@@ -1,8 +1,5 @@
-// The tsconfig.json file corresponds to the configuration(required to compile the project) of
-// the TypeScript compiler (tsc).
 {
   "compilerOptions": {
-    // the language used for the compiled output
     "target": "es5",
     "lib": [
       "dom",
@@ -16,17 +13,12 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    // the module manager used in the compiled output.
-    // system is for SystemJS, commonjs for CommonJS.
     "module": "esnext",
-    // the strategy used to resolve module declaration files (.d.ts files).
-    // With the node approach, they are loaded from the node_modules folder like a module (require('module-name'))
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react",
-    // support importing modules using absolute paths
+    "jsx": "react-jsx",
     "baseUrl": "src"
   },
   "include": [

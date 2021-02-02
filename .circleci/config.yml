@@ -33,17 +33,17 @@ jobs:
       # - You ran 'npm install' at an earlier build step but did not persist: /home/circleci/.cache/Cypress
       # Hence running e2e tests at setup job.
       # Nothing good solution as such yet; https://github.com/cypress-io/cypress/issues/2634
-      - run: 
-          name: Cypress verify
-          command: yarn cy:verify
+      # - run: 
+      #     name: Cypress verify
+      #     command: yarn cy:verify
 
-      - run: 
-          name: Cypress info
-          command: yarn cy:info
+      # - run: 
+      #     name: Cypress info
+      #     command: yarn cy:info
 
-      - run:
-          name: App end to end integration test run
-          command: yarn ci:cypress-run
+      # - run:
+      #     name: App end to end integration test run
+      #     command: yarn ci:cypress-run
 
       - save_cache:
           paths:
@@ -70,18 +70,18 @@ jobs:
 
       - run: ls -l ~/repo
 
-      - snyk/scan:
-          fail-on-issues: true
-          monitor-on-build: true
-          severity-threshold: high
+      # - snyk/scan:
+      #     fail-on-issues: true
+      #     monitor-on-build: true
+      #     severity-threshold: high
 
-      - run:
-          name: Linting for src code base
-          command: yarn lint
+      # - run:
+      #     name: Linting for src code base
+      #     command: yarn lint
 
-      - run:
-          name: App size, loading and running time inspection
-          command: yarn size
+      # - run:
+      #     name: App size, loading and running time inspection
+      #     command: yarn size
 
       - persist_to_workspace:
           root: .
@@ -103,13 +103,13 @@ jobs:
       - attach_workspace:
           at: ~/repo
 
-      - run:
-          name: App unit test using Jest
-          command: yarn test:ci
+      # - run:
+      #     name: App unit test using Jest
+      #     command: yarn test:ci
 
-      - codecov/upload:
-          file: './coverage/clover.xml'
-          token: ${CODECOV_TOKEN}
+      # - codecov/upload:
+      #     file: './coverage/clover.xml'
+      #     token: ${CODECOV_TOKEN}
 
       - persist_to_workspace:
           root: .

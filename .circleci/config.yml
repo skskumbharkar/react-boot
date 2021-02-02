@@ -40,3 +40,9 @@ jobs:
             - ~/.npm
             - ~/.cache
           key: v1-dependencies-{{ checksum "package.json" }}
+
+workflows:
+  version: 2
+  app_workflow:
+    jobs:
+      - deploy

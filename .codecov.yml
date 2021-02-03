@@ -11,8 +11,8 @@ coverage:
       default:
         # basic
         target: 70%
-        threshold: 0%
-        base: auto 
+        threshold: 70%
+        base: auto
         flags: 
           - unit
         paths: 

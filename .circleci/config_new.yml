@@ -29,7 +29,7 @@ jobs:
       # https://github.com/aws/aws-cli/issues/813
       - aws-s3/sync:
           from: build
-          to: 's3://github-issues-app/'
+          to: 's3://react-boot-app/'
           overwrite: true
 
       - save_cache:

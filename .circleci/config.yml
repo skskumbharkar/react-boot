@@ -143,7 +143,7 @@ jobs:
 
       - aws-s3/sync:
           from: build
-          to: 's3://github-issues-app/'
+          to: 's3://react-boot-app/'
           arguments: |
             --cache-control "max-age=86400"
           overwrite: true

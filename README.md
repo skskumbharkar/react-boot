@@ -1,4 +1,4 @@
-# Github issues
+# React Boot
 
 [![GitHub license](https://img.shields.io/github/license/skskumbharkar/github-issues)](https://github.com/skskumbharkar/github-issues/blob/main/LICENSE)
 [![CircleCI](https://img.shields.io/circleci/build/github/skskumbharkar/github-issues?color=green)](https://app.circleci.com/pipelines/github/skskumbharkar/github-issues)

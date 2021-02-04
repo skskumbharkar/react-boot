@@ -1,6 +1,6 @@
 {
-  "name": "react-tic-tac-toe",
-  "description": "TIC TAC TOE with time travel",
+  "name": "react-boot",
+  "description": "React.js package to kickstart an app",
   "version": "0.1.0",
   "private": true,
   "resolutions": {

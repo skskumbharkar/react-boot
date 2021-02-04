@@ -1,10 +1,31 @@
 # React Boot
 
-[![GitHub license](https://img.shields.io/github/license/skskumbharkar/github-issues)](https://github.com/skskumbharkar/github-issues/blob/main/LICENSE)
-[![CircleCI](https://img.shields.io/circleci/build/github/skskumbharkar/github-issues?color=green)](https://app.circleci.com/pipelines/github/skskumbharkar/github-issues)
-[![Codecov](https://img.shields.io/codecov/c/gh/skskumbharkar/github-issues?color=orange)](https://codecov.io/gh/skskumbharkar/github-issues)
-[![issues](https://img.shields.io/github/issues/skskumbharkar/github-issues?color=blue)](https://github.com/skskumbharkar/github-issues/issues)
-[![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/skskumbharkar/github-issues)](https://app.snyk.io/org/skskumbharkar/project/88713e92-0788-4778-8cdc-5c22042118cd)
+[![GitHub license](https://img.shields.io/github/license/skskumbharkar/react-boot)](https://github.com/skskumbharkar/react-boot/blob/main/LICENSE)
+[![CircleCI](https://img.shields.io/circleci/build/github/skskumbharkar/react-boot?color=green)](https://app.circleci.com/pipelines/github/skskumbharkar/react-boot)
+[![Codecov](https://img.shields.io/codecov/c/gh/skskumbharkar/react-boot?color=orange)](https://codecov.io/gh/skskumbharkar/react-boot)
+[![issues](https://img.shields.io/github/issues/skskumbharkar/react-boot?color=blue)](https://github.com/skskumbharkar/react-boot/issues)
+[![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/skskumbharkar/react-boot)](https://app.snyk.io/org/skskumbharkar/project/88713e92-0788-4778-8cdc-5c22042118cd)
+
+
+## What is React Boot?
+React boot is kick-starter package for react application building, it is based on create-react-app and typescript.
+
+It has solid integration with following libraries:
+1. React Material UI
+1. Jest
+1. SASS
+1. Redux
+1. React-router
+
+It has solid integration with following tools:
+1. Circle CI
+1. Snyk
+1. Codecov
+1. Storybook
+1. Cypress
+
+Upcoming integration:
+1. Graphql
 
 ## Available Scripts
 

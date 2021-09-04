@@ -2624,10 +2624,10 @@
     lodash "^4.17.15"
     redent "^3.0.0"
 
-"@testing-library/react-hooks@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@testing-library/react-hooks/-/react-hooks-5.0.0.tgz#994af047a94c7ed04b34920f70b3fd017e9976cd"
-  integrity sha512-c/wvcz/Set+KOvbi07EQO7tujsUIp5HnNAygJoSpMTVkIDcp7JtSemhjRDg1WL6Qsw076inWobTKCepK3mgi8A==
+"@testing-library/react-hooks@^5.1.3":
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/@testing-library/react-hooks/-/react-hooks-5.1.3.tgz#f722cc526025be2c16966a9a081edf47a2528721"
+  integrity sha512-UdEUtlQapQ579NEcXDAUE275u+KUsPtxW7NmFrNt0bE6lW8lqNCyxDK0RSuECmNZ/S0/fgP00W9RWRhVKO/hRg==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@types/react" ">=16.9.0"
@@ -6575,8 +6575,6 @@ domexception@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/domexception/-/domexception-2.0.1.tgz#fb44aefba793e1574b0af6aed2801d057529f304"
   integrity sha512-yxJ2mFy/sibVQlu5qHjOkf9J3K6zgmCxgJ94u2EdvDOV09H+32LtRswEcUsmUWN72pVLOEnTSRaIVVzVQgS0dg==
-  dependencies:
-    webidl-conversions "^5.0.0"
 
 domhandler@^2.3.0:
   version "2.4.2"
